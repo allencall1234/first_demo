@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<view class="userinfo">
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+  <text>{{userInfo.nickName}}</text>
+</view>
+<view class="userinfo-list">
+  <view class='userinfo-item'>
+    <text class="title">我的收藏</text>
+    <text>></text>
+  </view>
+  <view class='userinfo-item'>
+    <text class='title'>我的订单</text>
+    <text>></text>
+  </view>
+</view>

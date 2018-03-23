@@ -1,0 +1,90 @@
+.wrapper {
+  display: flex;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+}
+
+.left-wrapper {
+  width: 20%;
+  height: 100%;
+  background: #ccc;
+  border-right: 1px solid red;
+}
+
+.left-item {
+  font-size: 20rpx;
+  color: black;
+  text-align: center;
+  line-height: 98rpx;
+  height: 98rpx;
+}
+
+.wrap {
+  display: flex;
+  background: #f8f8f8;
+  width: 100%;
+  height: 100%;
+}
+
+.navLeft {
+  width: 20%;
+  /*border-right: 1px solid #ccc; */
+  background: #eee;
+  height: 100%;
+}
+
+.navLeft text {
+  display: block;
+  font-size: 14px;
+  text-align: center;
+  line-height: 98rpx;
+  height: 98rpx;
+}
+
+.navLeft .active {
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.navRight {
+  width: 80%;
+  height: 100%;
+}
+
+.navRight-main-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.navRight-main-item-list {
+  width: 100%;
+  height: 80px;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+
+.navRight-main-item-list navigator {
+  text-align: center;
+  width: 33%;
+}
+
+.navRight-main-item-list navigator image {
+  width: 80px;
+  height: 60px;
+  margin-top: 10px;
+}
+
+.navRight-main-item-list text {
+  display: block;
+  width: 100%;
+  height: 20px;
+  align-content: center;
+  font-size: 12px;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10px;
+  white-space: nowrap;
+}

@@ -1,0 +1,25 @@
+<view class="wrapper">
+  <view class="navLeft">
+    <block wx:for="{{titleArray}}">
+      <text catchtap="onLeftTap" data-index="{{index}}" data-test="{{index}}" class="{{currentIndex == index?'active':''}}">{{item}}</text>
+    </block>
+  </view>
+  <view class="navRight-main-item-list">
+    <block wx:for="{{childInfos}}">
+      <navigator data-img="{{item.image}}" data-text="{{item.name}}" bindtap='toDetailsTap' data-id="{{item.id}}">
+        <image src="{{item.image}}"></image>
+        <text>{{util.sub(item.name)}}</text>
+      </navigator>
+    </block>
+  </view>
+</view>
+<!--截取字符前5位  -->
+<wxs module="util">
+  var sub = function(val) {
+    if (val.length > 5) {
+      return val.substring(0, 5);
+    }
+    return val;
+  }
+  module.exports.sub = sub;
+</wxs>

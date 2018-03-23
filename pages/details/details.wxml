@@ -1,0 +1,25 @@
+<!--pages/details/details.wxml-->
+<view class="goods-view">
+  <view class="details">
+    <image src="{{goodsInfo.images[0]}}" class='details-img'></image>
+  </view>
+  <view class="goods_msg">
+    <view class="goods_name">{{goodsInfo.name}}</view>
+    <view class="goods_price">
+       <text class="price">{{goodsInfo.price}}</text>
+       <text class="sales">{{goodsInfo.sale}}</text>
+    </view>
+  </view>
+  <view>
+    <text class="goods_description">{{goodsInfo.description}}</text>
+  </view>
+  <view class="details">
+    <block wx:for="{{goodsInfo.images}}">
+      <image class="details-img" src="{{item}}" mode="widthFix"></image>
+    </block>
+  </view>
+  <view class="footer">
+    <button class="add-cart" size="mini" bindtap="addCollection">加入收藏</button>
+    <button class="buy" size="mini" open-type="contact" session-from="weapp" bindtap="contactMaster">联系店主</button>
+  </view>
+</view>
