@@ -25,8 +25,23 @@ Page({
   },
   toDetailsTap: function (e) {
     console.log("click");
-    wx.navigateTo({
-      url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
+    // wx.navigateTo({
+    //   url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
+    // })
+    wx.request({
+      url: 'https://www.cloud-rise.com/es/api/love',
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data:{
+        id:getApp().getAppId(),
+        goods:e.currentTarget.dataset.id,
+        user:getApp().getUserId()
+      },
+      success:function(res){
+        console.log(res)
+      }
     })
   },
 
