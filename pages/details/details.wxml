@@ -1,7 +1,7 @@
 <!--pages/details/details.wxml-->
 <view class="goods-view">
   <toast hidden="{{isHiddenToast}}" stytle="display:flex  width:100rpx" duration="1000" bindchange="toastChange">
-    收藏成功
+    {{goodsInfo.love?"已取消收藏":"收藏成功"}}
   </toast>
   <view class="details">
     <image src="{{goodsInfo.images[0]}}" class='details-img'></image>
@@ -22,7 +22,8 @@
     </block>
   </view>
   <view class="footer">
-    <button class="add-cart" size="default" bindtap="addCollect">加入收藏</button>
+    <button class="add-cart" size='default' bindtap='cancelCollect' hidden="{{!goodsInfo.love}}">取消收藏</button>
+    <button class="add-cart" size="default" bindtap="addCollect" hidden="{{goodsInfo.love}}">加入收藏</button>
     <button class="buy" size="mini" open-type="contact" session-from="weapp" bindtap="contactMaster">联系店主</button>
   </view>
 </view>

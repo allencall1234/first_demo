@@ -71,6 +71,6 @@ App({
 
   getUserId: function () {
     console.log("userId = " + this.globalData.userId)
-    return getApp().globalData.userId;
+    return this.globalData.userId;
   }
 })

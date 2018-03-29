@@ -35,14 +35,42 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
+          that.data.goodsInfo.love = true;
           that.setData({
-            isHiddenToast: false
+            isHiddenToast: false,
+            goodsInfo: that.data.goodsInfo
           })
         }
       }
     })
   },
-
+  //取消收藏
+  cancelCollect: function (e) {
+    console.log("addCollection")
+    var that = this;
+    wx.request({
+      url: 'https://www.cloud-rise.com/es/api/love',
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        id: getApp().getAppId(),
+        goods: that.data.goodsId,
+        user: getApp().getUserId(),
+        'delete':1
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.data.goodsInfo.love = false;
+          that.setData({
+            isHiddenToast: false,
+            goodsInfo:that.data.goodsInfo
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -57,14 +85,15 @@ Page({
       },
       data: {
         goods: options.goods,
-        id: getApp().getAppId()
+        id: getApp().getAppId(),
+        user: getApp().getUserId()
       },
       success: function (res) {
         console.log(res)
         if (res.statusCode == 200) {
           that.setData({
             goodsInfo: res.data,
-            goodsId:options.goods
+            goodsId:options.goods,
           })
         }
       }
