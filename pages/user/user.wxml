@@ -4,7 +4,7 @@
   <text>{{userInfo.nickName}}</text>
 </view>
 <view class="userinfo-list">
-  <view class='userinfo-item'>
+  <view class='userinfo-item' bindtap='gotoCollectionPage'>
     <text class="title">我的收藏</text>
     <text>></text>
   </view>

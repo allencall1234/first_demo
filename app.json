@@ -4,12 +4,13 @@
     "pages/categorys/categorys",
     "pages/user/user",
     "pages/logs/logs",
-    "pages/details/details"
+    "pages/details/details",
+    "pages/collection/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "First Demo",
+    "navigationBarTitleText": "我的商城",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

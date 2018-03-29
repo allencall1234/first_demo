@@ -21,6 +21,7 @@ App({
       //调用登录接口
       wx.login({
         success: function (res) {
+          console.log("login res = ")
           console.log(res)
           let code = res.code
           wx.getUserInfo({
@@ -30,7 +31,7 @@ App({
               that.globalData.res = res
               typeof cb == "function" && cb(that.globalData.userInfo)
               wx.request({
-                url: 'https://www.cloud-rise.com/es/api/login',
+                url: "https://www.cloud-rise.com/es/api/login",
                 method: "POST",
                 header: {
                   "Content-Type": "application/x-www-form-urlencoded"
@@ -43,7 +44,7 @@ App({
                   if (response.statusCode == 200) {
                     console.log("login--------------------")
                     console.log(response)
-                    that.globalData.userId = response.open;
+                    that.globalData.userId = response.data.open;
                   }
                 }
               })

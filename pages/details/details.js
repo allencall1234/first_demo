@@ -6,7 +6,41 @@ Page({
    */
   data: {
     goodsId: "",
-    goodsInfo: []
+    goodsInfo: [],
+    isHiddenToast: true
+  },
+  isShowToast: function () {
+    this.setData({
+      isHiddenToast: false
+    })
+  },
+  toastChange: function () {
+    this.setData({
+      isHiddenToast: true
+    })
+  },
+  addCollect: function (e) {
+    console.log("addCollection")
+    var that = this;
+    wx.request({
+      url: 'https://www.cloud-rise.com/es/api/love',
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        id: getApp().getAppId(),
+        goods: that.data.goodsId,
+        user: getApp().getUserId()
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.setData({
+            isHiddenToast: false
+          })
+        }
+      }
+    })
   },
 
   /**
@@ -29,14 +63,15 @@ Page({
         console.log(res)
         if (res.statusCode == 200) {
           that.setData({
-            goodsInfo: res.data
+            goodsInfo: res.data,
+            goodsId:options.goods
           })
         }
       }
     })
   },
-  addCollection: function(res){
-    
+  addCollection: function (res) {
+
   },
 
   /**

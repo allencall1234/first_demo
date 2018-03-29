@@ -38,6 +38,10 @@ page{
 .userinfo-item{
   display: flex;
   padding: 0 1em;
+  height: 50px;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
 }
 
 .userinfo-item:not(:last-child){

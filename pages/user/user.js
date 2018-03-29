@@ -10,6 +10,11 @@ Page({
     userInfo: {},
   },
 
+  gotoCollectionPage: function(){
+    wx.navigateTo({
+      url: '/pages/collection/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

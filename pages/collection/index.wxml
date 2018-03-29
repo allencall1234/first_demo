@@ -1,0 +1,15 @@
+<!--pages/collection/index.wxml-->
+<view class="bg-style">
+  <block wx:for="{{goods}}" wx:key="unique">
+    <view class="item-type">
+      <image src="{{item.image}}"></image>
+      <view class="item-text">
+        <text>{{item.name}}</text>
+        <text>${{item.price}}</text>
+      </view>
+      <view class="item-cancel">
+        <text>取消收藏</text>
+      </view>
+    </view>
+  </block>
+</view>
