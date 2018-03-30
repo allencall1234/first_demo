@@ -9,7 +9,15 @@ Page({
   data: {
     userInfo: {},
   },
-
+  gotoOrderPage: function(){
+    wx.navigateTo({
+      url: '/pages/order/leftSlide',
+    })
+    // wx.showToast({
+      // title: '开发中...',
+      // duration: 2000
+    // })
+  },
   gotoCollectionPage: function(){
     wx.navigateTo({
       url: '/pages/collection/index',

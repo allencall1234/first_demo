@@ -1,4 +1,6 @@
 //app.js
+import Touches from './utils/Touches.js'
+
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
@@ -72,5 +74,6 @@ App({
   getUserId: function () {
     console.log("userId = " + this.globalData.userId)
     return this.globalData.userId;
-  }
+  },
+  Touches: new Touches()
 })
