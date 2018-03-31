@@ -1,7 +1,7 @@
 <!--pages/details/details.wxml-->
 <view class="goods-view">
   <toast hidden="{{isHiddenToast}}" stytle="display:flex  width:100rpx" duration="1000" bindchange="toastChange">
-    {{goodsInfo.love?"已取消收藏":"收藏成功"}}
+    {{goodsInfo.love?"收藏成功":"已取消收藏"}}
   </toast>
   <view class="details">
     <image src="{{goodsInfo.images[0]}}" class='details-img'></image>
@@ -17,7 +17,7 @@
     <text class="goods_description">{{goodsInfo.description}}</text>
   </view>
   <view class="details">
-    <block wx:for="{{goodsInfo.images}}">
+    <block wx:for="{{finalImages}}">
       <image class="details-img" src="{{item}}" mode="widthFix"></image>
     </block>
   </view>
@@ -27,3 +27,14 @@
     <button class="buy" size="mini" open-type="contact" session-from="weapp" bindtap="contactMaster">联系店主</button>
   </view>
 </view>
+
+<!--取数组子元素  -->
+<wxs module="util">
+  var sub = function(val) {
+    if (val.length > 1) {
+      return val.slice(1);
+    }
+    return val;
+  }
+  module.exports.sub = sub;
+</wxs>

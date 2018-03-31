@@ -163,5 +163,9 @@ Page({
         }
       }
     })
+  },
+
+  onShareAppMessage:function(res){
+    
   }
 })

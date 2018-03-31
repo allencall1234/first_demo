@@ -81,6 +81,13 @@ swiper-item image {
   padding: 24rpx 0 0rpx 0;
   color: #000;
   margin-left: 24rpx;
+  display: flex;
+  flex-direction: row;
+  align-content: stretch
+}
+
+.goods-title text{
+  width: 140rpx;
 }
 
 .goods-box .goods-price {

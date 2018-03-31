@@ -24,14 +24,19 @@
 .item-text{
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 40%;
+  height:100%;
+  width: 60%
 }
 .item-text text{
   height: 140rpx;
-  display: block;
+  display: -webkit-box;
   align-content: center;
   margin-top: 10px;
+  line-height: 40rpx;
+  overflow: hidden;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 .item-cancel{
   display: flex;

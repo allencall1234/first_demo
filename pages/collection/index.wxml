@@ -4,8 +4,9 @@
     <view class="item-type" bindtap='gotoDetailPage' data-id="{{item.id}}">
       <image src="{{item.image}}"></image>
       <view class="item-text">
-        <text>{{item.name}}</text>
-        <text>${{item.price}}</text>
+        <text style='font-size:35rpx'>{{item.name}}</text>
+        <text style='height:60px;font-size:35rpx'>{{item.type}}/{{item.sale}}</text>
+        <text style='height:60px;color:#e64340;font-size:30rpx'>{{item.price}}</text>
       </view>
       <view class="item-cancel" hidden="{{true}}">
         <text>取消收藏</text>

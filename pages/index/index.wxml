@@ -19,9 +19,12 @@
       <view class="img-box">
         <image src="{{item.image}}" class="image" mode="aspectFill" lazy-load="true" />
       </view>
-      <view class="goods-title">{{item.name}}</view>
+      <view class='goods-title'>
+        <text>{{item.name}}</text>
+        <text style='text-align:right'>{{item.sale}}</text>
+      </view>
       <view style='display:flex;'>
-        <view class="goods-price">¥{{item.price}}</view>
+        <view class="goods-price">{{item.price}}</view>
       </view>
     </view>
   </view>

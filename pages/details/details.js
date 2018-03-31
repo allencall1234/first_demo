@@ -7,6 +7,7 @@ Page({
   data: {
     goodsId: "",
     goodsInfo: [],
+    finalImages:[],
     isHiddenToast: true
   },
   isShowToast: function () {
@@ -91,8 +92,12 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.statusCode == 200) {
+          console.log(res.data.images)
+          console.log(res.data.images.slice(1))
+          that.data.finalImages = res.data.images.slice(1)
           that.setData({
             goodsInfo: res.data,
+            finalImages:that.data.finalImages,
             goodsId:options.goods,
           })
         }
