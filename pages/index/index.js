@@ -13,7 +13,6 @@ Page({
     userInfo: {},
     swiperCurrent: 0,
     selectCurrent: 0,
-    categories: [],
     activeCategoryId: 0,
     goods: [],
     scrollTop: "0",
@@ -21,12 +20,22 @@ Page({
     top: 0,
     scrollTop: 520,
     pageIndex: 1,
-    canLoadMore:true
+    canLoadMore: true
   },
   toDetailsTap: function (e) {
-    wx.navigateTo({
-      url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
-    })
+    if (app.globalData.useId) {
+      console.log("userId不为空" + app.globalData.userId)
+      wx.navigateTo({
+        url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
+      })
+    } else {
+      console.log("重新获取userId")
+      app.getLoginUserId(function (userId) {
+        wx.navigateTo({
+          url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
+        })
+      })
+    }
   },
 
   swiperchange: function (e) {
@@ -79,7 +88,7 @@ Page({
 
   onReachBottom: function () {
     console.log("on Reach bottom!");
-    if(!this.data.canLoadMore){
+    if (!this.data.canLoadMore) {
       return;
     }
     wx.showLoading({
@@ -102,7 +111,7 @@ Page({
         if (res.statusCode == 200) {
           wx.hideLoading();
           const newGoods = that.data.goods.concat(res.data);
-          if(res.data.length < 10){
+          if (res.data.length < 10) {
             that.data.canLoadMore = false
           }
           that.setData({
@@ -115,14 +124,13 @@ Page({
   onLoad: function () {
     console.log('onLoad')
     var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo
-      })
-    })
-    var that = this
+    // //调用应用实例的方法获取全局数据
+    // app.getUserInfo(function (userInfo) {
+    //   //更新数据
+    //   that.setData({
+    //     userInfo: userInfo
+    //   })
+    // })
     wx.request({
       url: "https://www.cloud-rise.com/es/api/index",
       method: "POST",
@@ -165,7 +173,7 @@ Page({
     })
   },
 
-  onShareAppMessage:function(res){
-    
+  onShareAppMessage: function (res) {
+
   }
 })

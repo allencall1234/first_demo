@@ -23,40 +23,54 @@ App({
       //调用登录接口
       wx.login({
         success: function (res) {
-          console.log("login res = ")
           console.log(res)
-          let code = res.code
           wx.getUserInfo({
             success: function (res) {
               console.log(res)
               that.globalData.userInfo = res.userInfo
               that.globalData.res = res
               typeof cb == "function" && cb(that.globalData.userInfo)
-              wx.request({
-                url: "https://www.cloud-rise.com/es/api/login",
-                method: "POST",
-                header: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                },
-                data: {
-                  id: getApp().getAppId(),
-                  code: code
-                },
-                success: function (response) {
-                  if (response.statusCode == 200) {
-                    console.log("login--------------------")
-                    console.log(response)
-                    that.globalData.userId = response.data.open;
-                  }
-                }
-              })
             }
           })
-
         }
       })
     }
   },
+
+  getLoginUserId: function (cb) {
+    console.log(cb)
+    var that = this
+    if (this.globalData.userId) {
+      typeof cb == "function" && cb(this.globalData.userId)
+    } else {
+      //调用登录接口
+      wx.login({
+        success: function (res) {
+          wx.request({
+            url: "https://www.cloud-rise.com/es/api/login",
+            method: "POST",
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data: {
+              id: getApp().getAppId(),
+              code: res.code
+            },
+            success: function (response) {
+              console.log(response)
+              that.globalData.userId = response.data.open;
+              typeof cb == "function" && cb(that.globalData.userId)
+            }, fail: function () {
+              wx.showToast({
+                title: '用户登录失败',
+              })
+            }
+          })
+        }
+      })
+    }
+  },
+
   globalData: {
     userInfo: null,
     res: null,

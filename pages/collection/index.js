@@ -50,9 +50,19 @@ Page({
   },
 
   gotoDetailPage: function (e) {
-    wx.navigateTo({
-      url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
-    })
+    if (app.globalData.useId) {
+      console.log("userId不为空" + app.globalData.userId)
+      wx.navigateTo({
+        url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
+      })
+    } else {
+      console.log("重新获取userId")
+      app.getLoginUserId(function (userId) {
+        wx.navigateTo({
+          url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
+        })
+      })
+    }
   },
 
   /**
