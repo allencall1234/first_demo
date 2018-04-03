@@ -23,9 +23,9 @@ Page({
     canLoadMore: true
   },
   toDetailsTap: function (e) {
-      wx.navigateTo({
-        url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
-      })
+    wx.navigateTo({
+      url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
+    })
   },
 
   swiperchange: function (e) {
@@ -45,34 +45,18 @@ Page({
     wx.showLoading({
       title: '正在加载...',
     })
-    this.setData({
-      pageIndex: 1
-    })
     var that = this;
-    wx.request({
-      url: "https://www.cloud-rise.com/es/api/goods",
-      method: "POST",
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        id: getApp().getAppId(),
-        page: that.data.pageIndex
-      },
-      success: function (res) {
-        console.log(res)
-        wx.hideLoading()
-        wx.stopPullDownRefresh()
-        wx.hideNavigationBarLoading()
-        that.data.canLoadMore = true;
-        if (res.statusCode == 200) {
-          let pageIndex = that.data.pageIndex++;
-          that.setData({
-            goods: res.data,
-            pageIndex: pageIndex
-          })
-        }
-      }
+    this.data.pageIndex = 1
+    this.loadGoods(function (res) {
+      wx.hideLoading()
+      wx.stopPullDownRefresh()
+      wx.hideNavigationBarLoading()
+      that.data.canLoadMore = true;
+      var pageIndex = that.data.pageIndex++;
+      that.setData({
+        goods: res.data,
+        pageIndex: pageIndex
+      })
     })
   },
 
@@ -86,29 +70,15 @@ Page({
     })
     var that = this;
     that.data.pageIndex++;
-    wx.request({
-      url: "https://www.cloud-rise.com/es/api/goods",
-      method: "POST",
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        id: getApp().getAppId(),
-        page: that.data.pageIndex
-      },
-      success: function (res) {
-        console.log(res)
-        if (res.statusCode == 200) {
-          wx.hideLoading();
-          const newGoods = that.data.goods.concat(res.data);
-          if (res.data.length < 10) {
-            that.data.canLoadMore = false
-          }
-          that.setData({
-            goods: newGoods
-          })
-        }
+    this.loadGoods(function (res) {
+      wx.hideLoading();
+      const newGoods = that.data.goods.concat(res.data);
+      if (res.data.length < 10) {
+        that.data.canLoadMore = false
       }
+      that.setData({
+        goods: newGoods
+      })
     })
   },
   onLoad: function () {
@@ -121,6 +91,28 @@ Page({
         userInfo: userInfo
       })
     })
+
+    this.loadBanner(function (res) {
+      that.setData({
+        banners: res.data.images
+      })
+    })
+
+    this.loadGoods(function (res) {
+      var pageIndex = that.data.pageIndex++;
+      that.setData({
+        goods: res.data,
+        pageIndex: pageIndex
+      })
+    })
+  },
+
+  onShareAppMessage: function (res) {
+
+  },
+
+  //加载banner
+  loadBanner: function (cb) {
     wx.request({
       url: "https://www.cloud-rise.com/es/api/index",
       method: "POST",
@@ -132,14 +124,15 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        if (res.statusCode == 200) {
-          that.setData({
-            banners: res.data.images
-          })
-        }
+        typeof cb == 'function' && cb(res)
       }
     })
+  },
 
+
+  //加载商品列表
+  loadGoods: function (cb) {
+    var that = this
     wx.request({
       url: "https://www.cloud-rise.com/es/api/goods",
       method: "POST",
@@ -152,18 +145,8 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        if (res.statusCode == 200) {
-          let pageIndex = that.data.pageIndex++;
-          that.setData({
-            goods: res.data,
-            pageIndex: pageIndex
-          })
-        }
+        typeof cb == 'function' && cb(res)
       }
     })
-  },
-
-  onShareAppMessage: function (res) {
-
   }
 })

@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dataSources: [1, 2, 3],
     pageIndex: 1,
     goods: [],
     canLoadMore: true
@@ -113,7 +112,7 @@ Page({
 
     this.data.pageIndex++;
     var that = this;
-    this.loaData(function (res) {
+    this.loadData(function (res) {
       wx.hideLoading();
       if (res.data.length < 10) {
         that.data.canLoadMore = false
