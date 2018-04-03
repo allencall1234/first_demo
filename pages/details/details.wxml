@@ -27,6 +27,23 @@
     <button class="buy" size="mini" open-type="contact" session-from="weapp" bindtap="contactMaster">联系店主</button>
   </view>
 </view>
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showDialog}}"></view>
+<view class="modal-dialog" wx:if="{{showDialog}}">
+  <view class="modal-title">请填写用户信息</view>
+  <view class="modal-content">
+    <view class="modal-input" style='border-color:{{nameBorderColor}}'>
+      <input placeholder-class="input-holder" type="text" bindinput="onInputName" class="input" placeholder="请输入姓名"></input>
+    </view>
+    <view class="modal-input" style='margin-top:5px;border-color:{{phoneBorderColor}}'>
+      <input placeholder-class="input-holder" type="number" bindinput="onInputPhone" class="input" placeholder="请输入联系电话"></input>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+  </view>
+</view>
 
 <!--取数组子元素  -->
 <wxs module="util">

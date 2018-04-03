@@ -1,0 +1,12 @@
+<!--pages/order/index.wxml-->
+<view class="item-box">
+  <view class="items">
+    <block wx:for="{{list}}" wx:key="{{index}}" class="item">
+      <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" class="inner txt">
+        <image class="item-icon" mode="widthFix" src="{{item.icon}}"></image>
+        {{item}}
+      </view>
+      <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>
+    </block>
+  </view>
+</view> 

@@ -15,54 +15,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.showNavigationBarLoading();
-    // wx.showLoading({
-    //   title: '正在加载...',
-    // })
-    // var that = this;
-    // wx.request({
-    //   url: "https://www.cloud-rise.com/es/api/goods",
-    //   method: "POST",
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   data: {
-    //     id: getApp().getAppId(),
-    //     user: getApp().getUserId(),
-    //     page: 1
-    //   },
-    //   success: function (res) {
-    //     console.log(res)
-    //     wx.hideLoading()
-    //     wx.stopPullDownRefresh()
-    //     wx.hideNavigationBarLoading()
-    //     that.data.canLoadMore = true;
-    //     if (res.statusCode == 200) {
 
-    //       let pageIndex = that.data.pageIndex++;
-    //       that.setData({
-    //         goods: res.data,
-    //         pageIndex: pageIndex
-    //       })
-    //     }
-    //   }
-    // })
   },
 
   gotoDetailPage: function (e) {
-    if (app.globalData.useId) {
-      console.log("userId不为空" + app.globalData.userId)
-      wx.navigateTo({
-        url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
-      })
-    } else {
-      console.log("重新获取userId")
-      app.getLoginUserId(function (userId) {
-        wx.navigateTo({
-          url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
-        })
-      })
-    }
+    wx.navigateTo({
+      url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
+    })
   },
 
   /**
@@ -82,32 +41,24 @@ Page({
     })
     this.data.pageIndex = 1;
     var that = this;
-    wx.request({
-      url: "https://www.cloud-rise.com/es/api/goods",
-      method: "POST",
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        id: getApp().getAppId(),
-        user: getApp().getUserId(),
-        page: that.data.pageIndex
-      },
-      success: function (res) {
-        console.log(res)
-        wx.hideLoading()
-        wx.stopPullDownRefresh()
-        wx.hideNavigationBarLoading()
-        that.data.canLoadMore = true;
-        if (res.statusCode == 200) {
-          let pageIndex = that.data.pageIndex++;
-          that.setData({
-            goods: res.data,
-            pageIndex: pageIndex
-          })
-        }
+    this.loadData(function (res) {
+      wx.hideLoading()
+      wx.stopPullDownRefresh()
+      wx.hideNavigationBarLoading()
+      var pageIndex = that.data.pageIndex++;
+      that.data.canLoadMore = true;
+      var data = []
+      if (res.data.length > 0 && res.data != "none") {
+        data = res.data;
       }
+      console.log(data)
+      that.setData({
+        goods: data,
+        pageIndex: pageIndex
+      })
+
     })
+
   },
 
   /**
@@ -130,35 +81,24 @@ Page({
     wx.showLoading({
       title: '正在加载...',
     })
-    this.setData({
-      pageIndex: 1
-    })
+
+    this.data.pageIndex = 1;
     var that = this;
-    wx.request({
-      url: "https://www.cloud-rise.com/es/api/goods",
-      method: "POST",
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        id: getApp().getAppId(),
-        user: getApp().getUserId(),
-        page: that.data.pageIndex
-      },
-      success: function (res) {
-        console.log(res)
-        wx.hideLoading()
-        wx.stopPullDownRefresh()
-        wx.hideNavigationBarLoading()
-        that.data.canLoadMore = true;
-        if (res.statusCode == 200) {
-          let pageIndex = that.data.pageIndex++;
-          that.setData({
-            goods: res.data,
-            pageIndex: pageIndex
-          })
-        }
+    this.loadData(function (res) {
+      wx.hideLoading()
+      wx.stopPullDownRefresh()
+      wx.hideNavigationBarLoading()
+      var pageIndex = that.data.pageIndex++;
+      var data = [];
+      that.data.canLoadMore = true;
+      if (res.data.length > 0 && res.data != "none") {
+        data = res.data;
       }
+      that.setData({
+        goods: data,
+        pageIndex: pageIndex
+      })
+
     })
   },
 
@@ -170,8 +110,35 @@ Page({
     wx.showLoading({
       title: '正在加载...',
     })
+
+    this.data.pageIndex++;
     var that = this;
-    that.data.pageIndex++;
+    this.loaData(function (res) {
+      wx.hideLoading();
+      if (res.data.length < 10) {
+        that.data.canLoadMore = false
+      }
+      var data = []
+      if (res.data.length > 0 && res.data != "none") {
+        data = res.data;
+      }
+      const newGoods = that.data.goods.concat(data);
+      that.setData({
+        goods: newGoods
+      })
+
+    })
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+
+  loadData: function (cb) {
+    var that = this;
     wx.request({
       url: "https://www.cloud-rise.com/es/api/goods",
       method: "POST",
@@ -185,27 +152,8 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        if (res.statusCode == 200) {
-          wx.hideLoading();
-          if (res.data.length < 10) {
-            that.data.canLoadMore = false
-          }
-
-          if (res.data.length > 0 && res.data != "none") {
-            const newGoods = that.data.goods.concat(res.data);
-            that.setData({
-              goods: newGoods
-            })
-          }
-        }
+        typeof cb == 'function' && cb(res)
       }
     })
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

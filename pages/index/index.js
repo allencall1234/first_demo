@@ -7,7 +7,7 @@ Page({
   data: {
     indicatorDots: true,
     autoplay: true,
-    interval: 3000,
+    interval: 6000,
     duration: 1000,
     loadingHidden: false, // loading
     userInfo: {},
@@ -23,19 +23,9 @@ Page({
     canLoadMore: true
   },
   toDetailsTap: function (e) {
-    if (app.globalData.useId) {
-      console.log("userId不为空" + app.globalData.userId)
       wx.navigateTo({
         url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
       })
-    } else {
-      console.log("重新获取userId")
-      app.getLoginUserId(function (userId) {
-        wx.navigateTo({
-          url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
-        })
-      })
-    }
   },
 
   swiperchange: function (e) {
@@ -124,13 +114,13 @@ Page({
   onLoad: function () {
     console.log('onLoad')
     var that = this
-    // //调用应用实例的方法获取全局数据
-    // app.getUserInfo(function (userInfo) {
-    //   //更新数据
-    //   that.setData({
-    //     userInfo: userInfo
-    //   })
-    // })
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function (userInfo) {
+      //更新数据
+      that.setData({
+        userInfo: userInfo
+      })
+    })
     wx.request({
       url: "https://www.cloud-rise.com/es/api/index",
       method: "POST",

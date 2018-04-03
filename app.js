@@ -37,6 +37,7 @@ App({
     }
   },
 
+  //获取用户登录userId
   getLoginUserId: function (cb) {
     console.log(cb)
     var that = this
@@ -58,8 +59,15 @@ App({
             },
             success: function (response) {
               console.log(response)
-              that.globalData.userId = response.data.open;
-              typeof cb == "function" && cb(that.globalData.userId)
+              var id = 0;
+              if(response.data.id){
+                id = response.data.id
+              }
+              that.globalData.open = response.data.open;
+              that.globalData.userId = id;
+              that.globalData.name = response.data.name;
+              that.globalData.phone = response.data.phonel
+              typeof cb == "function" && cb(id)
             }, fail: function () {
               wx.showToast({
                 title: '用户登录失败',
@@ -71,18 +79,54 @@ App({
     }
   },
 
+  //用户实名制
+  userRegister: function (cb) {
+    var that = this;
+    //引导实名制
+    wx.request({
+      url: 'https://www.cloud-rise.com/es/api/user',
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        id: that.getAppId(),
+        open: that.globalData.open,
+        nick: that.globalData.userInfo.nickName,
+        avatar: that.globalData.userInfo.avatarUrl,
+        gender: that.globalData.userInfo.gender,
+        city: that.globalData.userInfo.city,
+        province: that.globalData.userInfo.province,
+        country: that.globalData.userInfo.country,
+        name: that.globalData.name,
+        phone: that.globalData.phone
+      },
+      success: function (res) {
+        console.log("用户实名成功回调:")
+        console.log(res)
+        that.globalData.userId = res.data;
+        typeof cb == "function" && cb(that.globalData.userId)
+      },
+      fail: function (res) {
+
+      }
+    })
+  },
+
   globalData: {
     userInfo: null,
     res: null,
     subDomain: "tz",
     appId: "wx155070bad7024d12",
-    userId: null
+    userId: 0,
+    phone: null,
+    name: null,
+    open: null
   },
 
   getAppId: function () {
-    console.log("id = " + "wx155070bad7024d12")
     // return "gh_564f5cbb3136";
-    return "wx155070bad7024d12";
+    return this.globalData.appId;
   },
 
   getUserId: function () {
