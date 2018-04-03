@@ -15,13 +15,14 @@ Page({
     phoneBorderColor: '#ddd'
   },
   gotoOrderPage: function () {
-    // wx.navigateTo({
-    //   url: '/pages/order/leftSlide',
-    // })
-    wx.showToast({
-      title: '开发中...',
-      duration: 2000
+    wx.navigateTo({
+      url: '/pages/order/leftSlide',
     })
+
+    // wx.showToast({
+    //   title: '开发中...',
+    //   duration: 2000
+    // })
   },
   gotoCollectionPage: function () {
     if (app.globalData.userId == 0) {
@@ -162,7 +163,7 @@ Page({
     var that = this
     app.userRegister(function () {
       that.gotoNextPage()
-    })
+    },that.data.name,that.data.phone)
   },
 
   onCancel: function () {

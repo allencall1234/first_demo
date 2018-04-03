@@ -60,7 +60,7 @@ App({
             success: function (response) {
               console.log(response)
               var id = 0;
-              if(response.data.id){
+              if (response.data.id) {
                 id = response.data.id
               }
               that.globalData.open = response.data.open;
@@ -80,7 +80,7 @@ App({
   },
 
   //用户实名制
-  userRegister: function (cb) {
+  userRegister: function (cb, name, phone) {
     var that = this;
     //引导实名制
     wx.request({
@@ -98,13 +98,16 @@ App({
         city: that.globalData.userInfo.city,
         province: that.globalData.userInfo.province,
         country: that.globalData.userInfo.country,
-        name: that.globalData.name,
-        phone: that.globalData.phone
+        name: name,
+        phone: phone
       },
       success: function (res) {
         console.log("用户实名成功回调:")
         console.log(res)
+        console.log("phone:" + phone + ",name:" + name)
         that.globalData.userId = res.data;
+        that.globalData.name = name;
+        that.globalData.phone = phone;
         typeof cb == "function" && cb(that.globalData.userId)
       },
       fail: function (res) {
@@ -133,5 +136,11 @@ App({
     console.log("userId = " + this.globalData.userId)
     return this.globalData.userId;
   },
+
+  getPhone: function () {
+    console.log("phone = " + this.globalData.phone)
+    return this.globalData.phone;
+  },
+
   Touches: new Touches()
 })

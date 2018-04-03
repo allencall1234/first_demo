@@ -1,4 +1,5 @@
 // pages/collection/index.js
+const App = getApp()
 Page({
 
   /**
@@ -6,21 +7,53 @@ Page({
    */
   data: {
     pageIndex: 1,
-    goods: [],
-    canLoadMore: true
+    canLoadMore: true,
+    goods: []
   },
 
+  touchS: function (e) {  // touchstart
+    let startX = App.Touches.getClientX(e)
+    console.log(startX)
+    startX && this.setData({ startX })
+  },
+  touchM: function (e) {  // touchmove
+    let goods = App.Touches.touchM(e, this.data.goods, this.data.startX)
+    console.log("touchMove")
+    goods && this.setData({ goods: goods })
+
+  },
+  touchE: function (e) {  // touchend
+    const width = 200  // 定义操作列表宽度
+    let goods = App.Touches.touchE(e, this.data.goods, this.data.startX, width)
+    console.log("touchEnd")
+    goods && this.setData({ goods: goods })
+  },
+  itemDelete: function (e) {  // itemDelete
+    let goods = App.Touches.deleteItem(e, this.data.goods)
+    goods && this.setData({ goods: goods })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(App.globalData)
   },
 
   gotoDetailPage: function (e) {
     wx.navigateTo({
       url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
     })
+  },
+  gotoMainPage: function (e) {
+    console.log("goto main page")
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
+  },
+
+  cancelCollection: function (e) {
+    var index = e.currentTarget.dataset.index
+    this.method_collection(index)
   },
 
   /**
@@ -154,5 +187,32 @@ Page({
         typeof cb == 'function' && cb(res)
       }
     })
-  }
+  },
+
+  //收藏-取消收藏接口，flag-0收藏，flag-1取消收藏
+  method_collection: function (index) {
+    var that = this;
+    wx.request({
+      url: 'https://www.cloud-rise.com/es/api/love',
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        id: getApp().getAppId(),
+        goods: that.data.goods[index].id,
+        user: getApp().getUserId(),
+        'delete': 1
+      },
+      success: function (res) {
+        that.data.goods.splice(index, 1)
+        that.setData({
+          goods: that.data.goods
+        })
+        wx.showToast({
+          title: '已取消收藏',
+        })
+      }
+    })
+  },
 })

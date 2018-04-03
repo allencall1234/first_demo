@@ -1,7 +1,27 @@
 <!--pages/collection/index.wxml-->
-<view class="bg-style">
+<view class="item-wrapper">
+  <view class="item-list" wx:for="{{goods}}" wx:for-item="item" wx:for-index="index" wx:key="that">
+    <view class="item-info" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" style="left:{{item.left + 'rpx'}}" bindtap='gotoDetailPage' data-id="{{item.id}}">
+      <view>
+        <image class="info-img" src="{{item.image}}" mode='widthfix'></image>
+      </view>
+      <view class="info-desc">
+        <view class="name" style='margin-top:20rpx'>{{item.name}}</view>
+        <view class="info">{{item.type}} {{item.sale}}</view>
+        <view class="time" style='margin-bottom:20rpx;color:#e64340;font-size:30rpx'>{{item.price}}</view>
+      </view>
+    </view>
+    <view class="item-oper">
+      <view class="oper-delete" bindtap="cancelCollection" data-index="{{index}}">取消收藏</view>
+    </view>
+  </view>
+</view>
+<view class="empty-view" hidden="{{goods.length>0}}" bindtap="gotoMainPage">
+  <text style='color:#000;'>暂时没有收藏\n去首页看看</text>
+</view>
+<!-- <view class="bg-style">
   <block wx:for="{{goods}}" wx:key="unique">
-    <view class="item-type" bindtap='gotoDetailPage' data-id="{{item.id}}">
+    <view class="item-type" bindtap='gotoDetailPage' data-id="{{item.id}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" style="left:{{item.left + 'rpx'}}">
       <image src="{{item.image}}"></image>
       <view class="item-text">
         <text style='font-size:35rpx'>{{item.name}}</text>
@@ -13,4 +33,4 @@
       </view>
     </view>
   </block>
-</view>
+</view> -->

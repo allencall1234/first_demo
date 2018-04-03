@@ -1,7 +1,7 @@
-const itemData = [
+var itemData = [
     {
         no: '001',
-        img: '/images/item1.png',
+        img: '/images/goods2.jpg',
         name: '宋双庙',
         info: '我：二狗，你妈喊你回家吃饭',
         time: '上午12:00',
@@ -9,7 +9,7 @@ const itemData = [
     ,
     {
         no: '001',
-        img: '/images/item1.png',
+        img: '/images/goods1.jpg',
         name: '订阅号',
         info: '拜拜吧比较爱白芭比白阿比',
         time: '昨天',

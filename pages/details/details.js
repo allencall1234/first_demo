@@ -196,7 +196,7 @@ Page({
       if (that.data.collectState != -1) {
         that.method_collection(that.data.collectState)
       }
-    })
+    },that.data.name,that.data.phone)
   },
 
   onCancel: function () {

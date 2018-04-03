@@ -1,5 +1,6 @@
 /* pages/collection/index.wxss */
-.bg-style{
+
+.bg-style {
   background: #f5f4f4;
   height: 100%;
   width: 100%;
@@ -7,7 +8,7 @@
   flex-direction: column;
 }
 
-.item-type{
+.item-type {
   display: flex;
   height: 280rpx;
   margin-top: 10px;
@@ -16,19 +17,20 @@
   box-shadow: 1px 1px 1px #ccc;
 }
 
-.item-type image{
+.item-type image {
   height: 240rpx;
   width: 240rpx;
-  margin:20rpx;
+  margin: 20rpx;
 }
 
-.item-text{
+.item-text {
   display: flex;
   flex-direction: column;
-  height:100%;
-  width: 60%
+  height: 100%;
+  width: 60%;
 }
-.item-text text{
+
+.item-text text {
   height: 140rpx;
   display: -webkit-box;
   align-content: center;
@@ -39,7 +41,8 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
-.item-cancel{
+
+.item-cancel {
   display: flex;
   background: #f60;
   width: 30%;
@@ -49,6 +52,109 @@
   justify-content: center;
 }
 
-.item-cancel text{
+.item-cancel text {
   align-self: center;
+}
+
+.item-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f5f4f4;
+}
+
+.item-list {
+  position: relative;
+  width: 100%;
+  height: 280rpx;
+  margin-top: 20rpx;
+}
+
+.item-info, .item-oper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin-top: 10rpx;
+}
+
+.item-info {
+  display: flex;
+  z-index: 2;
+  background: white;
+  transition: left 0.2s ease-in-out;
+  box-shadow: 1px 1px 1px #ccc;
+}
+
+.item-oper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.oper-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200rpx;
+  z-index: 1;
+  color: white;
+  background: red;
+}
+
+.info-img {
+  height: 240rpx;
+  width: 240rpx;
+  margin: 20rpx;
+  box-shadow: 1px 1px 1px #ccc;
+}
+
+.info-wrapper {
+  margin-left: 20rpx;
+  width: auto;
+}
+
+.info-desc {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 6rpx;
+}
+
+.info-desc .name {
+  font-size: 32rpx;
+  color: black;
+  font-weight: 600;
+}
+
+.info-desc .time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.info-content {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.empty-view {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-view text{
+  text-align: center
 }
