@@ -13,6 +13,7 @@
   margin-top: 10px;
   background: white;
   align-content: stretch;
+  box-shadow: 1px 1px 1px #ccc;
 }
 
 .item-type image{

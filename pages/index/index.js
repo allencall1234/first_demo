@@ -39,6 +39,7 @@ Page({
       // wx.navigateTo({ })
     }
   },
+  //上拉刷新
   onPullDownRefresh: function () {
     console.log("onPullDownRefresh!")
     wx.showNavigationBarLoading();
@@ -59,7 +60,7 @@ Page({
       })
     })
   },
-
+  //下拉加载更多
   onReachBottom: function () {
     console.log("on Reach bottom!");
     if (!this.data.canLoadMore) {
@@ -91,13 +92,13 @@ Page({
         userInfo: userInfo
       })
     })
-
+    //加载banner
     this.loadBanner(function (res) {
       that.setData({
         banners: res.data.images
       })
     })
-
+    //加载商品
     this.loadGoods(function (res) {
       var pageIndex = that.data.pageIndex++;
       that.setData({
