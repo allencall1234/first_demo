@@ -12,19 +12,13 @@ Page({
     name: null,
     phone: null,
     nameBorderColor: '#ddd',
-    phoneBorderColor: '#ddd'
+    phoneBorderColor: '#ddd',
+    pageFlag: 0
   },
-  gotoOrderPage: function () {
-    wx.navigateTo({
-      url: '/pages/order/leftSlide',
+  gotoPage: function (e) {
+    this.setData({
+      pageFlag: e.currentTarget.dataset.id
     })
-
-    // wx.showToast({
-    //   title: '开发中...',
-    //   duration: 2000
-    // })
-  },
-  gotoCollectionPage: function () {
     if (app.globalData.userId == 0) {
       console.log("第一次查询userId为0");
       var that = this;
@@ -163,7 +157,7 @@ Page({
     var that = this
     app.userRegister(function () {
       that.gotoNextPage()
-    },that.data.name,that.data.phone)
+    }, that.data.name, that.data.phone)
   },
 
   onCancel: function () {
@@ -173,8 +167,14 @@ Page({
   },
 
   gotoNextPage() {
-    wx.navigateTo({
-      url: '/pages/collection/index',
-    })
+    if (this.data.pageFlag == 1) {
+      wx.navigateTo({
+        url: '/pages/collection/index',
+      })
+    } else if (this.data.pageFlag == 2) {
+      wx.navigateTo({
+        url: '/pages/order/index',
+      })
+    }
   }
 })

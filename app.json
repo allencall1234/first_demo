@@ -6,7 +6,7 @@
     "pages/logs/logs",
     "pages/details/details",
     "pages/collection/index",
-    "pages/order/leftSlide"
+    "pages/order/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

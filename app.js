@@ -58,7 +58,10 @@ App({
               code: res.code
             },
             success: function (response) {
+              console.log('--------userinfo-----------')
               console.log(response)
+              console.log(that.globalData)
+              console.log('--------userinfo-----------')
               var id = 0;
               if (response.data.id) {
                 id = response.data.id
@@ -66,7 +69,7 @@ App({
               that.globalData.open = response.data.open;
               that.globalData.userId = id;
               that.globalData.name = response.data.name;
-              that.globalData.phone = response.data.phonel
+              that.globalData.phone = response.data.phone;
               typeof cb == "function" && cb(id)
             }, fail: function () {
               wx.showToast({

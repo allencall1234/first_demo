@@ -29,8 +29,11 @@ Page({
       isHiddenToast: true
     })
   },
-  addCollect: function (e) {
+  dealCollection: function (e) {
     //如果userId=0,先登录
+    this.setData({
+      collectState:e.currentTarget.dataset.id
+    })
     if (app.globalData.userId == 0) {
       console.log("第一次查询userId为0");
       var that = this;
@@ -39,7 +42,6 @@ Page({
         if (userId == 0) {
           console.log("登录之后查询userId为" + userId);
           that.setData({
-            collectState: 0,
             showDialog: true,
             name: null,
             phone: null,
@@ -48,12 +50,12 @@ Page({
           })
         } else {
           console.log("登录之后查询userId为:" + userId);
-          that.method_collection(0);
+          that.method_collection(that.data.collectState);
         }
       })
     } else {
       console.log("第一次查询userId不为0");
-      this.method_collection(0);
+      this.method_collection(this.data.collectState);
     }
   },
 

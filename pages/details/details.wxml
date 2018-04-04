@@ -22,8 +22,8 @@
     </block>
   </view>
   <view class="footer">
-    <button class="add-cart" size='default' bindtap='cancelCollect' hidden="{{!goodsInfo.love}}">取消收藏</button>
-    <button class="add-cart" size="default" bindtap="addCollect" hidden="{{goodsInfo.love}}">加入收藏</button>
+    <button class="add-cart" size='default' bindtap='dealCollection' hidden="{{!goodsInfo.love}}" data-id='1'>取消收藏</button>
+    <button class="add-cart" size="default" bindtap="dealCollection" hidden="{{goodsInfo.love}}" data-id='0'>加入收藏</button>
     <button class="buy" size="mini" open-type="contact" session-from="weapp" bindtap="contactMaster">联系店主</button>
   </view>
 </view>

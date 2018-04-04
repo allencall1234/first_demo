@@ -16,8 +16,8 @@
     </view>
   </view>
 </view>
-<view class="empty-view" hidden="{{goods.length>0}}" bindtap="gotoMainPage">
-  <text style='color:#000;'>暂时没有收藏\n去首页看看</text>
+<view class="empty-view" hidden="{{goods.length>0}}">
+  <text bindtap="gotoMainPage" style='color:#000;'>暂时没有收藏\n去首页看看</text>
 </view>
 <!-- <view class="bg-style">
   <block wx:for="{{goods}}" wx:key="unique">

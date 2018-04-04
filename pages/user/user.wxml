@@ -4,11 +4,11 @@
   <text>{{userInfo.nickName}}</text>
 </view>
 <view class="userinfo-list">
-  <view class='userinfo-item' bindtap='gotoCollectionPage'>
+  <view class='userinfo-item' bindtap='gotoPage' data-id='1'>
     <text class="title">我的收藏</text>
     <text>></text>
   </view>
-  <view class='userinfo-item' bindtap='gotoOrderPage'>
+  <view class='userinfo-item' bindtap='gotoPage' data-id='2'>
     <text class='title'>我的订单</text>
     <text>></text>
   </view>

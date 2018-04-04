@@ -1,12 +1,18 @@
 <!--pages/order/index.wxml-->
-<view class="item-box">
-  <view class="items">
-    <block wx:for="{{list}}" wx:key="{{index}}" class="item">
-      <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" class="inner txt">
-        <image class="item-icon" mode="widthFix" src="{{item.icon}}"></image>
-        {{item}}
+<view class="empty-view" hidden="{{goods.length>0}}">
+  <text style='color:#000;text-align:center;'>暂时没有订单\n去首页看看</text>
+</view>
+<view class="bg-style">
+  <block wx:for="{{goods}}" wx:key="unique">
+    <view class='item-type'>
+      <view class='item'>
+        <text style='flex:1;'>{{item.name}}</text>
+        <text style='text-align:right;font-size:24rpx;color:#ccc'>{{item.date}}</text>
       </view>
-      <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>
-    </block>
-  </view>
-</view> 
+      <view class='item'>
+        <text style='font-size:24rpx;color:#e64340;flex:1;'>{{item.price}}</text>
+        <text style='text-align:right;font-size:24rpx;color:#888'>单号:{{item.express}}</text>
+      </view>
+    </view>
+  </block>
+</view>
