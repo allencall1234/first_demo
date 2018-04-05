@@ -28,10 +28,6 @@ Page({
     console.log("touchEnd")
     goods && this.setData({ goods: goods })
   },
-  itemDelete: function (e) {  // itemDelete
-    let goods = App.Touches.deleteItem(e, this.data.goods)
-    goods && this.setData({ goods: goods })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
