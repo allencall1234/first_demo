@@ -43,6 +43,16 @@ page{
   flex-direction: row;
   align-items: center;
 }
+.userinfo-item-description{
+  display: flex;
+  padding: 10rpx 1em;
+  height: fit-content;
+  background-color: white;
+  margin-top: 20rpx;
+  flex-direction: row;
+  line-height: 60rpx;
+  align-items: center;
+}
 
 .userinfo-item:not(:last-child){
     border-bottom: 1px solid #ddd;
@@ -219,5 +229,15 @@ input-holder {
   width: 50%;
   color: #ec5300;
   text-align: center;
+}
+
+.power-style{
+  color: #ccc;
+  width: 100%;
+  font-size: 24rpx;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 24rpx;
 }
 

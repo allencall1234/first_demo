@@ -130,7 +130,7 @@ Page({
     })
   },
 
-
+  
   //加载商品列表
   loadGoods: function (cb) {
     var that = this

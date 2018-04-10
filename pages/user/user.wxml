@@ -13,7 +13,15 @@
     <text>></text>
   </view>
 </view>
-
+<view class='userinfo-item-description'>
+  <text>{{title}}</text>
+</view>
+<view class='userinfo-item-description' style='margin-top:0;text-indent:0px'>
+  <text>{{description}}</text>
+</view>
+<view class='power-style'>
+  <text>Powered by 云起时科技®</text>
+</view>
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showDialog}}"></view>
 <view class="modal-dialog" wx:if="{{showDialog}}">

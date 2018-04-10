@@ -7,11 +7,11 @@
     <view class='item-type'>
       <view class='item'>
         <text style='flex:1;'>{{item.name}}</text>
-        <text style='text-align:right;font-size:24rpx;color:#ccc'>{{item.date}}</text>
+        <text style='text-align:right;font-size:24rpx;color:#ccc'>订单日期:{{item.date}}</text>
       </view>
       <view class='item'>
         <text style='font-size:24rpx;color:#e64340;flex:1;'>{{item.price}}</text>
-        <text style='text-align:right;font-size:24rpx;color:#888'>单号:{{item.express}}</text>
+        <text style='text-align:right;font-size:24rpx;color:#888'>快递单号:{{item.express}}</text>
       </view>
     </view>
   </block>

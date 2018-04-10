@@ -13,7 +13,9 @@ Page({
     phone: null,
     nameBorderColor: '#ddd',
     phoneBorderColor: '#ddd',
-    pageFlag: 0
+    pageFlag: 0,
+    description: null,
+    title:null
   },
   gotoPage: function (e) {
     this.setData({
@@ -55,6 +57,13 @@ Page({
       console.log(userInfo)
       that.setData({
         userInfo: userInfo
+      })
+    })
+
+    this.loadBanner(function (res) {
+      that.setData({
+        title:res.data.name,
+        description: res.data.description
       })
     })
   },
@@ -176,5 +185,22 @@ Page({
         url: '/pages/order/index',
       })
     }
-  }
+  },
+  //加载banner
+  loadBanner: function (cb) {
+    wx.request({
+      url: "https://www.cloud-rise.com/es/api/index",
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        id: getApp().getAppId()
+      },
+      success: function (res) {
+        console.log(res)
+        typeof cb == 'function' && cb(res)
+      }
+    })
+  },
 })
