@@ -13,11 +13,11 @@
     </block>
   </view>
 </view>
-<!--截取字符前5位  -->
+<!--截取字符前6位  -->
 <wxs module="util">
   var sub = function(val) {
-    if (val.length > 5) {
-      return val.substring(0, 5);
+    if (val.length > 6) {
+      return val.substring(0, 6);
     }
     return val;
   }

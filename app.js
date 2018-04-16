@@ -7,6 +7,16 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+
+    var that = this
+    this.loadBanner(function (res) {
+      that.globalData.storeName = res.data.name;
+      that.globalData.storeDesc = res.data.description;
+      that.globalData.banner = res.data.images
+      wx.setNavigationBarTitle({
+        title: res.data.name,
+      })
+    })
   },
   onShow: function () {
     console.log("onShow!")
@@ -123,11 +133,15 @@ App({
     userInfo: null,
     res: null,
     subDomain: "tz",
-    appId: "wx155070bad7024d12",
+    // appId: "wx155070bad7024d12",
+    appId: "wx2017f10d39748643",
     userId: 0,
     phone: null,
     name: null,
-    open: null
+    open: null,
+    storeName: null,
+    storeDesc: null,
+    banner: []
   },
 
   getAppId: function () {
@@ -145,5 +159,23 @@ App({
     return this.globalData.phone;
   },
 
-  Touches: new Touches()
+  Touches: new Touches(),
+
+  //加载banner
+  loadBanner: function (cb) {
+    wx.request({
+      url: "https://www.cloud-rise.com/es/api/index",
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        id: this.getAppId()
+      },
+      success: function (res) {
+        console.log(res)
+        typeof cb == 'function' && cb(res)
+      }
+    })
+  },
 })

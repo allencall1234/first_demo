@@ -20,7 +20,8 @@ Page({
     top: 0,
     scrollTop: 520,
     pageIndex: 1,
-    canLoadMore: true
+    canLoadMore: true,
+    banners: []
   },
   toDetailsTap: function (e) {
     wx.navigateTo({
@@ -84,6 +85,10 @@ Page({
   },
   onLoad: function () {
     console.log('onLoad')
+    this.setData({
+      banners: app.globalData.banner
+    })
+    // console.log(this.data.banners)
     var that = this
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function (userInfo) {
@@ -92,12 +97,7 @@ Page({
         userInfo: userInfo
       })
     })
-    //加载banner
-    this.loadBanner(function (res) {
-      that.setData({
-        banners: res.data.images
-      })
-    })
+
     //加载商品
     this.loadGoods(function (res) {
       var pageIndex = that.data.pageIndex++;
@@ -112,25 +112,6 @@ Page({
 
   },
 
-  //加载banner
-  loadBanner: function (cb) {
-    wx.request({
-      url: "https://www.cloud-rise.com/es/api/index",
-      method: "POST",
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        id: getApp().getAppId()
-      },
-      success: function (res) {
-        console.log(res)
-        typeof cb == 'function' && cb(res)
-      }
-    })
-  },
-
-  
   //加载商品列表
   loadGoods: function (cb) {
     var that = this

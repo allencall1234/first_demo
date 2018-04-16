@@ -4,7 +4,7 @@
     {{goodsInfo.love?"收藏成功":"已取消收藏"}}
   </toast>
   <view class="details">
-    <image src="{{goodsInfo.images[0]}}" class='details-img'></image>
+    <image src="{{goodsInfo.images[0]}}" class='details-img' mode='widthFix'></image>
   </view>
   <view class="goods_msg">
     <view class="goods_name">{{goodsInfo.name}}</view>

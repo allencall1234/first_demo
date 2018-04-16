@@ -15,7 +15,7 @@ Page({
     phoneBorderColor: '#ddd',
     pageFlag: 0,
     description: null,
-    title:null
+    title: null
   },
   gotoPage: function (e) {
     this.setData({
@@ -60,11 +60,9 @@ Page({
       })
     })
 
-    this.loadBanner(function (res) {
-      that.setData({
-        title:res.data.name,
-        description: res.data.description
-      })
+    this.setData({
+      title: app.globalData.storeName,
+      description: app.globalData.storeDesc
     })
   },
 

@@ -67,6 +67,7 @@ page {
   display: block;
   height: fit-content;
   min-height: 80rpx;
+  font-size: 35rpx;
   box-shadow: 1px 1px 1px #ddd;
 }
 
