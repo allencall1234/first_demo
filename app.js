@@ -1,6 +1,7 @@
 //app.js
 import Touches from './utils/Touches.js'
 
+const updateManager = wx.getUpdateManager()
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
@@ -17,6 +18,29 @@ App({
         title: res.data.name,
       })
     })
+
+    updateManager.onCheckForUpdate(function (res) {
+      console.log("check update:" + res.hasUpdate)
+    })
+
+    updateManager.onUpdateReady(function (res) {
+      console.log("update ready")
+      wx.showModal({
+        title: '更新提示',
+        content: '新版本已经准备好，是否重启应用？',
+        success: function (res) {
+          if (res.confirm) {
+            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+            updateManager.applyUpdate()
+          }
+        }
+      })
+    })
+
+    updateManager.onUpdateFailed(function (res) {
+      console.log("update failed!")
+    })
+
   },
   onShow: function () {
     console.log("onShow!")
@@ -24,6 +48,7 @@ App({
   onHide: function () {
     console.log("onHide!")
   },
+
   getUserInfo: function (cb) {
     console.log(cb)
     var that = this
