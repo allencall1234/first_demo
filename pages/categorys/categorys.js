@@ -8,12 +8,13 @@ Page({
     currentIndex: 0,
     titleArray: [],
     childInfos: null,
-    dataArray: []
+    dataArray: [],
+    scrollTop: 0
   },
   toDetailsTap: function (e) {
-      wx.navigateTo({
-        url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
-      })
+    wx.navigateTo({
+      url: "/pages/details/details?goods=" + e.currentTarget.dataset.id
+    })
   },
   onLeftTap: function (e) {
     var index = e.currentTarget.dataset.index;
@@ -26,7 +27,8 @@ Page({
       var tempDatas = this.data.dataArray[index];
       this.setData({
         currentIndex: index,
-        childInfos: tempDatas
+        childInfos: tempDatas,
+        scrollTop: 0
       })
     } else {
       this.setData({
@@ -34,6 +36,7 @@ Page({
       })
       this.loadChildItems()
     }
+
   },
 
   /**
@@ -89,7 +92,8 @@ Page({
         wx.hideLoading()
         if (res.statusCode == 200) {
           that.setData({
-            childInfos: res.data
+            childInfos: res.data,
+            scrollTop: 0
           })
           that.data.dataArray[that.data.currentIndex] = res.data
         }

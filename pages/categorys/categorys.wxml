@@ -1,31 +1,26 @@
 <view class="wrapper">
-  <view class="navLeft">
+  <scroll-view class="navLeft" scroll-y="true">
     <block wx:for="{{titleArray}}">
       <text catchtap="onLeftTap" data-index="{{index}}" data-test="{{index}}" class="{{currentIndex == index?'active':''}}">{{item}}</text>
     </block>
-  </view>
-  <!-- <view class="navRight-main-item-list">
-    <block wx:for="{{childInfos}}">
-      <navigator data-img="{{item.image}}" data-text="{{item.name}}" bindtap='toDetailsTap' data-id="{{item.id}}">
-        <image src="{{item.image}}"></image>
-        <text>{{util.sub(item.name)}}</text>
-      </navigator>
-    </block>
-  </view> -->
-  <view class="navRight-main-item-list">
-    <view class="goods-box" wx:for-items="{{childInfos}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
-      <view class="img-box">
-        <image src="{{item.image}}" class="image" mode="aspectFill" lazy-load="true" />
+  </scroll-view>
+
+  <scroll-view class="navRight-main-item-list" scroll-y="true" scroll-top="{{scrollTop}}">
+    <view class='good-list'>
+      <view class="goods-box" wx:for-items="{{childInfos}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+        <view class="img-box">
+          <image src="{{item.image}}" class="image" mode="aspectFill" lazy-load="true" />
+        </view>
+        <view class='goods-name'>{{item.name}}
+        </view>
+        <view class='goods-title'>
+          <text style='font-size:22rpx'>{{item.type}}</text>
+          <text style='font-size:22rpx;text-align:right;margin-right:15rpx'>{{item.sale}}</text>
+        </view>
+        <view class="goods-price">{{item.price}}</view>
       </view>
-      <view class='goods-name'>{{item.name}}
-      </view>
-      <view class='goods-title'>
-        <text>{{item.type}}</text>
-        <text style='text-align:right'>{{item.sale}}</text>
-      </view>
-      <view class="goods-price">{{item.price}}</view>
     </view>
-  </view>
+  </scroll-view>
 </view>
 <!--截取字符前6位  -->
 <wxs module="util">
